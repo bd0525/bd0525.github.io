@@ -95,4 +95,26 @@ h2 {
     .main-content {
         margin-left: 0;
     }
+}
+
+.degree-date {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.degree, .date {
+    margin: 0;
+}
+
+.date {
+    color: #666;
+    font-style: italic;
+}
+
+.location {
+    font-weight: normal;
+    color: #666;
+    font-size: 0.9em;
 } 
