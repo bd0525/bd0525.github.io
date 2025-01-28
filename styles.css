@@ -128,4 +128,8 @@ h2 {
 .hometown .label {
     font-weight: bold;
     font-style: normal;
+}
+
+.education-item {
+    margin-bottom: 2rem;
 } 
