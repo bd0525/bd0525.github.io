@@ -121,6 +121,11 @@ h2 {
 
 .hometown {
     margin: 5px 0;
-    color: #ffffff;
+    color: #e0e0e0;
     font-style: italic;
+}
+
+.hometown .label {
+    font-weight: bold;
+    font-style: normal;
 } 
