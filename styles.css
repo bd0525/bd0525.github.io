@@ -117,4 +117,10 @@ h2 {
     font-weight: normal;
     color: #666;
     font-size: 0.9em;
+}
+
+.hometown {
+    margin: 5px 0;
+    color: #ffffff;
+    font-style: italic;
 } 
