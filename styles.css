@@ -151,4 +151,22 @@ h2 {
 .sidebar-nav a:hover {
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 5px;
+}
+
+.top-nav {
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.top-nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+}
+
+.top-nav a:hover {
+    color: #007bff;
 } 
