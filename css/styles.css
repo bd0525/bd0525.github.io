@@ -169,4 +169,8 @@ h2 {
 
 .top-nav a:hover {
     color: #007bff;
+}
+
+.top-nav a.active {
+    color: #007bff;
 } 
