@@ -179,7 +179,7 @@ h2 {
 .top-nav a.active::before {
     content: '';
     position: absolute;
-    left: 1rem;
+    left: 3rem;
     top: 0;
     height: 100%;
     width: 3px;
