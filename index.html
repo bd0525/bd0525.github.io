@@ -7,6 +7,33 @@
     <link rel="stylesheet" href="css/styles.css">
     <!-- Font Awesome for social icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .coursework-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .coursework-toggle {
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .coursework-toggle:hover {
+            color: #666;
+        }
+        
+        .coursework-toggle::before {
+            content: '▶';
+            display: inline-block;
+            margin-right: 5px;
+            transition: transform 0.3s;
+        }
+        
+        .coursework-toggle.active::before {
+            transform: rotate(90deg);
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -67,10 +94,12 @@
                         <p class="date">Aug. 2024 - Expected May 2030</p>
                     </div>
                     <p class="details">
-                        • <strong>Relevant Coursework:</strong><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;- EN.553.632 : Bayesian Statistics<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;- EN.560.618 : Probabilistic Methods in Civil Engineering and Mechanics<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;- EN.530.605 : Mechanics of Solids and Materials<br>
+                        <span class="coursework-toggle"><strong>Relevant Coursework</strong></span>
+                        <div class="coursework-content">
+                            &nbsp;&nbsp;&nbsp;&nbsp;- EN.553.632 : Bayesian Statistics<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;- EN.560.618 : Probabilistic Methods in Civil Engineering and Mechanics<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;- EN.530.605 : Mechanics of Solids and Materials<br>
+                        </div>
                         • GPA: 100000000.0/4.0
                     </p>
                 </div>
@@ -84,16 +113,18 @@
                     <p class="details">
                         • <strong>Honors/Awards:</strong> <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;- Duke University Civil Engineering Graduate Scholarship<br>
-                        • <strong>Relevant Coursework:</strong> <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;- <a href="https://math.duke.edu/math-557-syllabus" target="_blank">Math 557 : Introduction to Partial Differential Equations</a>
-                        [Qualifying Eligible (QE) course for the Math PhD]<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;- ECE 551D : Introduction to Programming, Data Structures, and Algorithms in C++<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;- CEE 520 : Continuum Mechanics<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;- CEE 530 / ME 524 : Introduction to the Finite Element Method<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;- CEE 630 / ME 525 : Nonlinear Finite Element Analysis<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;- CEE 628 : Uncertainty Quantification in Computational Science and Engineering<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;- CEE 690 : Advanced Fluid Mechanics<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;- CEE 690 : Chaotic Data-Systems Analysis<br>
+                        <span class="coursework-toggle"><strong>Relevant Coursework</strong></span>
+                        <div class="coursework-content">
+                            &nbsp;&nbsp;&nbsp;&nbsp;- <a href="https://math.duke.edu/math-557-syllabus" target="_blank">Math 557 : Introduction to Partial Differential Equations</a>
+                            [Qualifying Eligible (QE) course for the Math PhD]<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;- ECE 551D : Introduction to Programming, Data Structures, and Algorithms in C++<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;- CEE 520 : Continuum Mechanics<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;- CEE 530 / ME 524 : Introduction to the Finite Element Method<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;- CEE 630 / ME 525 : Nonlinear Finite Element Analysis<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;- CEE 628 : Uncertainty Quantification in Computational Science and Engineering<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;- CEE 690 : Advanced Fluid Mechanics<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;- CEE 690 : Chaotic Data-Systems Analysis<br>
+                        </div>
                     </p>
                 </div>
 
@@ -115,5 +146,19 @@
             <img src="https://leetcard.jacoblin.cool/bd0525?theme=dark&font=Gentium%20Book%20Basic&ext=heatmap" alt="LeetCode Stats">
         </div>
     </div>
+    <script>
+        document.querySelectorAll('.coursework-toggle').forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const content = toggle.nextElementSibling;
+                toggle.classList.toggle('active');
+                
+                if (toggle.classList.contains('active')) {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                } else {
+                    content.style.maxHeight = 0;
+                }
+            });
+        });
+    </script>
 </body>
 </html>
