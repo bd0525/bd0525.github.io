@@ -154,34 +154,16 @@
                 <div class="research-item">
                     <h3>Laura Dalton Research Group, CEE Department, Duke University <span class="location">Durham, NC, USA</span></h3>
                     <div class="position-info">
-                        <div class="degree-date">
-                            <span class="coursework-toggle">
-                                <i class="fa-solid fa-angles-right"></i>
-                                <strong>Graduate Research Assistant</strong>
-                            </span>
-                            <p class="date">May 2023 - Feb. 2024</p>
-                        </div>
-                        <div class="coursework-content">
-                            <p style="padding-left: 20px;">- Alternative Cementitious Materials Testing: Triaxial testing, compression testing, and mechanical analysis of cementitious materials. YOLO model for crack detection to evaluate material integrity.</p>
-                        </div>
+                      <div class="degree-date">
+                        <p><strong>Graduate Research Assistant</strong></p>
+                        <p class="date">May 2023 - Feb. 2024</p>
+                      </div>
+                      <p style="padding-left: 20px;">
+                        - Alternative Cementitious Materials Testing: Triaxial testing, compression testing, and mechanical analysis 
+                        of cementitious materials. YOLO model for crack detection to evaluate material integrity.
+                      </p>
                     </div>
-                </div>
-
-                <div class="research-item">
-                    <h3>Guglielmo Scovazzi Research Group, CEE Department, Duke University <span class="location">Durham, NC, USA</span></h3>
-                    <div class="position-info">
-                        <div class="degree-date">
-                            <span class="coursework-toggle">
-                                <i class="fa-solid fa-angles-right"></i>
-                                <strong>Graduate Research Assistant</strong>
-                            </span>
-                            <p class="date">May 2023 - Apr. 2024</p>
-                        </div>
-                        <div class="coursework-content">
-                            <p style="padding-left: 20px;">- Embedded Methods for Linear Elasticity: Bone scaffold topology optimization with the Shifted Boundary Method.</p>
-                        </div>
-                    </div>
-                </div>
+                  </div>                  
             </section>
 
             <!-- LeetCode Stats Board -->
@@ -189,24 +171,24 @@
         </div>
     </div>
     <script>
-        document.querySelectorAll('.coursework-toggle').forEach(toggle => {
-            toggle.addEventListener('click', () => {
-                // Find the .coursework-content. Try the next sibling first, if not found, search within the closest parent.
-                let content = toggle.nextElementSibling;
-                if (!content || !content.classList.contains('coursework-content')) {
-                    content = toggle.closest('div').querySelector('.coursework-content');
-                }
-                
-                toggle.classList.toggle('active');
-                
-                if (toggle.classList.contains('active')) {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                } else {
-                    content.style.maxHeight = 0;
-                }
-            });
+        // Only toggling details within Education
+        document.querySelectorAll(".coursework-toggle").forEach((toggle) => {
+          toggle.addEventListener("click", () => {
+            let content = toggle.nextElementSibling;
+            if (!content || !content.classList.contains("coursework-content")) {
+              content = toggle.closest("div").querySelector(".coursework-content");
+            }
+    
+            toggle.classList.toggle("active");
+    
+            if (toggle.classList.contains("active")) {
+              content.style.maxHeight = content.scrollHeight + "px";
+            } else {
+              content.style.maxHeight = 0;
+            }
+          });
         });
-    </script>
+      </script>
     
 </body>
 </html>
