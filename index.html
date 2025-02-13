@@ -191,7 +191,8 @@
     <script>
         document.querySelectorAll('.coursework-toggle').forEach(toggle => {
             toggle.addEventListener('click', () => {
-                const content = toggle.nextElementSibling;
+                // Find the .coursework-content within the same .position-info as the clicked toggle
+                const content = toggle.closest('.position-info').querySelector('.coursework-content');
                 toggle.classList.toggle('active');
                 
                 if (toggle.classList.contains('active')) {
