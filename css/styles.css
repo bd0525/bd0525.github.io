@@ -141,7 +141,6 @@ h2 {
 .education-item:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-width: 3px;
 }
 
 .sidebar-nav {
@@ -208,7 +207,6 @@ h2 {
 .project-item:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-width: 3px;
 }
 
 .project-item h3 {
@@ -247,5 +245,4 @@ h2 {
 .research-item:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-width: 3px;
 } 
