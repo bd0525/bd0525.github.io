@@ -141,7 +141,7 @@ h2 {
 .education-item:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-width: 2px;
+    border-width: 3px;
 }
 
 .sidebar-nav {
@@ -208,7 +208,7 @@ h2 {
 .project-item:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-width: 2px;
+    border-width: 3px;
 }
 
 .project-item h3 {
@@ -241,11 +241,11 @@ h2 {
     padding: 1.5rem;
     border: 1px solid #ddd;
     border-radius: 8px;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, border-width 0.2s;
 }
 
 .research-item:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-width: 2px;
+    border-width: 3px;
 } 
