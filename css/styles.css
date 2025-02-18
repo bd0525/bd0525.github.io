@@ -133,14 +133,14 @@ h2 {
 .education-item {
     margin-bottom: 0.8rem;
     padding: 1.5rem;
-    border: 1px solid #ddd;
+    border: 2px solid #ddd;
     border-radius: 8px;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .education-item:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .sidebar-nav {
@@ -199,14 +199,14 @@ h2 {
 .project-item {
     margin-bottom: 2rem;
     padding: 1.5rem;
-    border: 1px solid #ddd;
+    border: 2px solid #ddd;
     border-radius: 8px;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .project-item:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .project-item h3 {
@@ -237,12 +237,12 @@ h2 {
 .research-item {
     margin-bottom: 0.8rem;
     padding: 1.5rem;
-    border: 1px solid #ddd;
+    border: 2px solid #ddd;
     border-radius: 8px;
     transition: transform 0.2s, box-shadow 0.2s, border-width 0.2s;
 }
 
 .research-item:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 } 
