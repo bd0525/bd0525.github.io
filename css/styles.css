@@ -235,5 +235,14 @@ h2 {
 }
 
 .research-item {
-    margin-bottom: 10px;
+    margin-bottom: 0.8rem;
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.research-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 } 
