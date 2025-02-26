@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boyuan's Homepage</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animation.css">
     <!-- Font Awesome for social icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -38,14 +39,14 @@
             transform: rotate(90deg);
         }
         
-        /* Intro Animation Styles - Directly embedded */
+        /* Intro Animation Styles */
         .intro-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #333333; /* Dark gray background as requested */
+            background-color: #000;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -55,7 +56,7 @@
         }
         
         .intro-content {
-            color: #fff; /* White text as requested */
+            color: #fff;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             text-align: center;
         }
@@ -63,35 +64,29 @@
         .intro-text {
             font-size: 3rem;
             font-weight: 300;
-            display: inline-block;
-            white-space: nowrap;
-            position: relative;
+            opacity: 0;
         }
         
-        .intro-text::after {
-            content: '|';
-            position: absolute;
-            right: -10px;
-            animation: blink-caret 0.75s step-end infinite;
+        .hello-text {
+            animation: fadeInOut 2.0s ease forwards;
         }
         
-        /* Blinking cursor animation */
-        @keyframes blink-caret {
-            from, to { opacity: 0; }
-            50% { opacity: 1; }
+        .welcome-text {
+            animation: fadeInOut 2.0s ease forwards;
+            animation-delay: 2.0s;
         }
         
-        .hello-text, .welcome-text {
-            min-height: 3.5rem; /* Keep height consistent even when empty */
-            margin-bottom: 1rem;
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.1); }
         }
         
         .hidden {
             display: none;
         }
         
-        /* Initial state for main content */
-        #mainContent {
+        .container {
             opacity: 0;
             transition: opacity 1s ease;
         }
@@ -101,12 +96,12 @@
     <!-- Intro Animation Overlay -->
     <div class="intro-overlay" id="introOverlay">
         <div class="intro-content">
-            <div class="intro-text hello-text" id="helloText"></div>
-            <div class="intro-text welcome-text" id="welcomeText"></div>
+            <div class="intro-text hello-text" id="helloText">Hello, __</div>
+            <div class="intro-text welcome-text" id="welcomeText">Welcome to Boyuan's Homepage</div>
         </div>
     </div>
 
-    <div class="container" id="mainContent">
+    <div class="container animated-content" id="mainContent">
         <!-- Left Sidebar -->
         <div class="sidebar">
             <div class="profile">
@@ -286,67 +281,9 @@
             }
           });
         });
-        
-        // Animation Script - Directly embedded
-        window.addEventListener("load", function() {
-            // Get DOM elements
-            const introOverlay = document.getElementById("introOverlay");
-            const mainContent = document.getElementById("mainContent");
-            const helloText = document.getElementById("helloText");
-            const welcomeText = document.getElementById("welcomeText");
-            
-            // Skip animation if it's already been shown in this session
-            if (sessionStorage.getItem('animationShown')) {
-                introOverlay.style.display = "none";
-                mainContent.style.opacity = "1";
-                return;
-            }
-            
-            // For debugging - force show the content if animation doesn't work
-            setTimeout(function() {
-                if (mainContent.style.opacity !== "1") {
-                    console.log("Fallback: Animation may have failed, showing content anyway");
-                    introOverlay.style.display = "none";
-                    mainContent.style.opacity = "1";
-                }
-            }, 8000); // Safety timeout
-            
-            // Function to simulate typewriter effect
-            function typeWriter(element, text, speed, callback) {
-                let i = 0;
-                const timer = setInterval(function() {
-                    if (i < text.length) {
-                        element.textContent += text.charAt(i);
-                        i++;
-                    } else {
-                        clearInterval(timer);
-                        if (callback) setTimeout(callback, 500);
-                    }
-                }, speed);
-            }
-            
-            // Full animation sequence
-            setTimeout(function() {
-                // Type Hello text
-                typeWriter(helloText, "Hello, __", 100, function() {
-                    // After Hello is typed and a short pause, type Welcome text
-                    typeWriter(welcomeText, "Welcome to Boyuan's Homepage", 70, function() {
-                        // After both texts are typed, wait a bit before showing the main content
-                        setTimeout(function() {
-                            introOverlay.style.opacity = "0";
-                            mainContent.style.opacity = "1";
-                            
-                            // Remove overlay after fade out
-                            setTimeout(function() {
-                                introOverlay.classList.add("hidden");
-                                // Set flag in session storage so animation only shows once per session
-                                sessionStorage.setItem('animationShown', 'true');
-                            }, 500);
-                        }, 1000);
-                    });
-                });
-            }, 500); // Start animation after a short delay
-        });
       </script>
+    
+    <!-- Animation script -->
+    <script src="js/animation.js"></script>
 </body>
 </html>

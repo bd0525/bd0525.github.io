@@ -23,27 +23,22 @@
 .intro-text {
     font-size: 3rem;
     font-weight: 300;
-    display: inline-block;
-    white-space: nowrap;
-    position: relative;
+    opacity: 0;
 }
 
-.intro-text::after {
-    content: '|';
-    position: absolute;
-    right: -10px;
-    animation: blink-caret 0.75s step-end infinite;
+.hello-text {
+    animation: fadeInOut 1.5s ease forwards;
 }
 
-/* Blinking cursor animation */
-@keyframes blink-caret {
-    from, to { opacity: 0; }
-    50% { opacity: 1; }
+.welcome-text {
+    animation: fadeInOut 1.5s ease forwards;
+    animation-delay: 1.5s;
 }
 
-.hello-text, .welcome-text {
-    min-height: 3.5rem; /* Keep height consistent even when empty */
-    margin-bottom: 1rem;
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.1); }
 }
 
 .hidden {
