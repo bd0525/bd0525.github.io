@@ -23,52 +23,27 @@
 .intro-text {
     font-size: 3rem;
     font-weight: 300;
-    position: relative;
     display: inline-block;
     white-space: nowrap;
-    overflow: hidden;
-    border-right: 0.15em solid #fff; /* Blinking cursor */
+    position: relative;
 }
 
-/* Typewriter effects */
-.hello-text {
-    width: 0;
-    animation: 
-        typing 1s steps(10, end) forwards,
-        blink-caret 0.75s step-end infinite;
-}
-
-.welcome-text {
-    width: 0;
-    opacity: 0;
-    animation: 
-        typing-welcome 2s steps(30, end) forwards,
-        blink-caret 0.75s step-end infinite;
-    animation-delay: 2s; /* Start after hello text */
-}
-
-/* Typing animation for hello */
-@keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-}
-
-/* Typing animation for welcome (separate to control timing) */
-@keyframes typing-welcome {
-    0% { 
-        width: 0; 
-        opacity: 1; 
-    }
-    100% { 
-        width: 100%;
-        opacity: 1;
-    }
+.intro-text::after {
+    content: '|';
+    position: absolute;
+    right: -10px;
+    animation: blink-caret 0.75s step-end infinite;
 }
 
 /* Blinking cursor animation */
 @keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: #fff }
+    from, to { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+.hello-text, .welcome-text {
+    min-height: 3.5rem; /* Keep height consistent even when empty */
+    margin-bottom: 1rem;
 }
 
 .hidden {

@@ -12,59 +12,52 @@ document.addEventListener("DOMContentLoaded", function() {
     // Skip animation if it's already been shown in this session
     if (sessionStorage.getItem('animationShown')) {
         introOverlay.classList.add("hidden");
-        mainContent.classList.add("animated-content");
         mainContent.style.opacity = "1";
         return;
     }
     
-    // Set initial content (will be typed out by animation)
-    const helloContent = helloText.textContent;
-    const welcomeContent = welcomeText.textContent;
+    // Store the original text
+    const helloContent = "Hello, __";
+    const welcomeContent = "Welcome to Boyuan's Homepage";
     
-    // Clear text content so typing animation starts from empty
+    // Start with empty content
     helloText.textContent = "";
     welcomeText.textContent = "";
     
-    // Manually type hello text
-    let helloIndex = 0;
-    function typeHello() {
-        if (helloIndex < helloContent.length) {
-            helloText.textContent += helloContent.charAt(helloIndex);
-            helloIndex++;
-            setTimeout(typeHello, 100); // Typing speed
-        } else {
-            // Start welcome text typing after hello is complete
-            setTimeout(typeWelcome, 1000); // 1 second pause before welcome
-        }
+    // Function to simulate typewriter effect
+    function typeWriter(element, text, speed, callback) {
+        let i = 0;
+        const timer = setInterval(function() {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+            } else {
+                clearInterval(timer);
+                if (callback) setTimeout(callback, 500);
+            }
+        }, speed);
     }
     
-    // Manually type welcome text
-    let welcomeIndex = 0;
-    function typeWelcome() {
-        if (welcomeIndex < welcomeContent.length) {
-            welcomeText.textContent += welcomeContent.charAt(welcomeIndex);
-            welcomeIndex++;
-            setTimeout(typeWelcome, 70); // Typing speed (slightly faster)
-        } else {
-            // Finish animation and show main content after welcome typing is done
-            setTimeout(finishAnimation, 1000); // Wait 1 second after typing completes
-        }
-    }
-    
-    // Function to end animation and show main content
-    function finishAnimation() {
-        introOverlay.style.opacity = "0";
-        mainContent.style.opacity = "1";
-        
-        // Remove the overlay after fade out
-        setTimeout(() => {
-            introOverlay.classList.add("hidden");
-        }, 500);
-        
-        // Set flag in session storage so animation only shows once per session
-        sessionStorage.setItem('animationShown', 'true');
-    }
-    
-    // Start typing animation
-    setTimeout(typeHello, 500); // Start after a short delay
+    // Full animation sequence
+    setTimeout(function() {
+        // Type Hello text
+        typeWriter(helloText, helloContent, 100, function() {
+            // After Hello is typed and a short pause, type Welcome text
+            typeWriter(welcomeText, welcomeContent, 70, function() {
+                // After both texts are typed, wait a bit before showing the main content
+                setTimeout(function() {
+                    introOverlay.style.opacity = "0";
+                    mainContent.style.opacity = "1";
+                    
+                    // Remove overlay after fade out
+                    setTimeout(function() {
+                        introOverlay.classList.add("hidden");
+                    }, 500);
+                    
+                    // Remember that animation has been shown in this session
+                    sessionStorage.setItem('animationShown', 'true');
+                }, 1000);
+            });
+        });
+    }, 500); // Start animation after a short delay
 }); 
