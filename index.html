@@ -38,6 +38,64 @@
         .coursework-toggle.active i {
             transform: rotate(90deg);
         }
+        
+        /* Intro Animation Styles - Directly embedded */
+        .intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #333333; /* Dark gray background as requested */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+        
+        .intro-content {
+            color: #fff; /* White text as requested */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            text-align: center;
+        }
+        
+        .intro-text {
+            font-size: 3rem;
+            font-weight: 300;
+            display: inline-block;
+            white-space: nowrap;
+            position: relative;
+        }
+        
+        .intro-text::after {
+            content: '|';
+            position: absolute;
+            right: -10px;
+            animation: blink-caret 0.75s step-end infinite;
+        }
+        
+        /* Blinking cursor animation */
+        @keyframes blink-caret {
+            from, to { opacity: 0; }
+            50% { opacity: 1; }
+        }
+        
+        .hello-text, .welcome-text {
+            min-height: 3.5rem; /* Keep height consistent even when empty */
+            margin-bottom: 1rem;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        /* Ensure main content starts hidden and fades in */
+        .animated-content {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
     </style>
 </head>
 <body>
@@ -228,6 +286,62 @@
               content.style.maxHeight = 0;
             }
           });
+        });
+        
+        // Animation Script - Directly embedded
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get DOM elements
+            const introOverlay = document.getElementById("introOverlay");
+            const mainContent = document.getElementById("mainContent");
+            const helloText = document.getElementById("helloText");
+            const welcomeText = document.getElementById("welcomeText");
+            
+            // For debugging - force show the content if animation doesn't work
+            setTimeout(function() {
+                if (mainContent.style.opacity !== "1") {
+                    console.log("Fallback: Animation may have failed, showing content anyway");
+                    introOverlay.style.display = "none";
+                    mainContent.style.opacity = "1";
+                }
+            }, 8000); // Safety timeout
+            
+            // Start with empty content
+            helloText.textContent = "";
+            welcomeText.textContent = "";
+            
+            // Function to simulate typewriter effect
+            function typeWriter(element, text, speed, callback) {
+                let i = 0;
+                const timer = setInterval(function() {
+                    if (i < text.length) {
+                        element.textContent += text.charAt(i);
+                        i++;
+                    } else {
+                        clearInterval(timer);
+                        if (callback) setTimeout(callback, 500);
+                    }
+                }, speed);
+            }
+            
+            // Full animation sequence
+            setTimeout(function() {
+                // Type Hello text
+                typeWriter(helloText, "Hello, __", 100, function() {
+                    // After Hello is typed and a short pause, type Welcome text
+                    typeWriter(welcomeText, "Welcome to Boyuan's Homepage", 70, function() {
+                        // After both texts are typed, wait a bit before showing the main content
+                        setTimeout(function() {
+                            introOverlay.style.opacity = "0";
+                            mainContent.style.opacity = "1";
+                            
+                            // Remove overlay after fade out
+                            setTimeout(function() {
+                                introOverlay.classList.add("hidden");
+                            }, 500);
+                        }, 1000);
+                    });
+                });
+            }, 500); // Start animation after a short delay
         });
       </script>
     
