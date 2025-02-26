@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boyuan's Homepage</title>
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/animation.css">
     <!-- Font Awesome for social icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -91,8 +90,8 @@
             display: none;
         }
         
-        /* Ensure main content starts hidden and fades in */
-        .animated-content {
+        /* Initial state for main content */
+        #mainContent {
             opacity: 0;
             transition: opacity 1s ease;
         }
@@ -107,7 +106,7 @@
         </div>
     </div>
 
-    <div class="container animated-content" id="mainContent">
+    <div class="container" id="mainContent">
         <!-- Left Sidebar -->
         <div class="sidebar">
             <div class="profile">
@@ -289,12 +288,19 @@
         });
         
         // Animation Script - Directly embedded
-        document.addEventListener("DOMContentLoaded", function() {
+        window.addEventListener("load", function() {
             // Get DOM elements
             const introOverlay = document.getElementById("introOverlay");
             const mainContent = document.getElementById("mainContent");
             const helloText = document.getElementById("helloText");
             const welcomeText = document.getElementById("welcomeText");
+            
+            // Skip animation if it's already been shown in this session
+            if (sessionStorage.getItem('animationShown')) {
+                introOverlay.style.display = "none";
+                mainContent.style.opacity = "1";
+                return;
+            }
             
             // For debugging - force show the content if animation doesn't work
             setTimeout(function() {
@@ -304,10 +310,6 @@
                     mainContent.style.opacity = "1";
                 }
             }, 8000); // Safety timeout
-            
-            // Start with empty content
-            helloText.textContent = "";
-            welcomeText.textContent = "";
             
             // Function to simulate typewriter effect
             function typeWriter(element, text, speed, callback) {
@@ -337,6 +339,8 @@
                             // Remove overlay after fade out
                             setTimeout(function() {
                                 introOverlay.classList.add("hidden");
+                                // Set flag in session storage so animation only shows once per session
+                                sessionStorage.setItem('animationShown', 'true');
                             }, 500);
                         }, 1000);
                     });
@@ -344,8 +348,5 @@
             }, 500); // Start animation after a short delay
         });
       </script>
-    
-    <!-- Animation script -->
-    <script src="js/animation.js"></script>
 </body>
 </html>
