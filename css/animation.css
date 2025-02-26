@@ -23,22 +23,52 @@
 .intro-text {
     font-size: 3rem;
     font-weight: 300;
-    opacity: 0;
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 0.15em solid #fff; /* Blinking cursor */
 }
 
+/* Typewriter effects */
 .hello-text {
-    animation: fadeInOut 1.5s ease forwards;
+    width: 0;
+    animation: 
+        typing 1s steps(10, end) forwards,
+        blink-caret 0.75s step-end infinite;
 }
 
 .welcome-text {
-    animation: fadeInOut 1.5s ease forwards;
-    animation-delay: 1.5s;
+    width: 0;
+    opacity: 0;
+    animation: 
+        typing-welcome 2s steps(30, end) forwards,
+        blink-caret 0.75s step-end infinite;
+    animation-delay: 2s; /* Start after hello text */
 }
 
-@keyframes fadeInOut {
-    0% { opacity: 0; transform: scale(0.9); }
-    50% { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(1.1); }
+/* Typing animation for hello */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+/* Typing animation for welcome (separate to control timing) */
+@keyframes typing-welcome {
+    0% { 
+        width: 0; 
+        opacity: 1; 
+    }
+    100% { 
+        width: 100%;
+        opacity: 1;
+    }
+}
+
+/* Blinking cursor animation */
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #fff }
 }
 
 .hidden {
