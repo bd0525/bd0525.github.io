@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boyuan's Homepage</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animation.css">
     <!-- Font Awesome for social icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -37,10 +38,70 @@
         .coursework-toggle.active i {
             transform: rotate(90deg);
         }
+        
+        /* Intro Animation Styles */
+        .intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+        
+        .intro-content {
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            text-align: center;
+        }
+        
+        .intro-text {
+            font-size: 3rem;
+            font-weight: 300;
+            opacity: 0;
+        }
+        
+        .hello-text {
+            animation: fadeInOut 1.5s ease forwards;
+        }
+        
+        .welcome-text {
+            animation: fadeInOut 1.5s ease forwards;
+            animation-delay: 1.5s;
+        }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.1); }
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .container {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Intro Animation Overlay -->
+    <div class="intro-overlay" id="introOverlay">
+        <div class="intro-content">
+            <div class="intro-text hello-text" id="helloText">Hello, World</div>
+            <div class="intro-text welcome-text" id="welcomeText">Welcome to Boyuan's Homepage</div>
+        </div>
+    </div>
+
+    <div class="container animated-content" id="mainContent">
         <!-- Left Sidebar -->
         <div class="sidebar">
             <div class="profile">
@@ -222,5 +283,7 @@
         });
       </script>
     
+    <!-- Animation script -->
+    <script src="js/animation.js"></script>
 </body>
 </html>

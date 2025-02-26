@@ -1,0 +1,52 @@
+/* Intro Animation Styles */
+.intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #333333; /* Dark gray background as requested */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.intro-content {
+    color: #fff; /* White text as requested */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    text-align: center;
+}
+
+.intro-text {
+    font-size: 3rem;
+    font-weight: 300;
+    opacity: 0;
+}
+
+.hello-text {
+    animation: fadeInOut 1.5s ease forwards;
+}
+
+.welcome-text {
+    animation: fadeInOut 1.5s ease forwards;
+    animation-delay: 1.5s;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.1); }
+}
+
+.hidden {
+    display: none;
+}
+
+/* Ensure main content starts hidden and fades in */
+.animated-content {
+    opacity: 0;
+    transition: opacity 1s ease;
+} 
