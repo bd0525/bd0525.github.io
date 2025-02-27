@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Text content for typewriter effect
     const helloContent = "Hello\u00A0\u00A0,\u00A0\u00A0\u00A0\u00A0_____";
-    const welcomeContent = "Welcome to Boyuan's Homepage";
+    const welcomeContent = "Welcome\u00A0 to\u00A0 Boyuan's\u00A0 Homepage";
     
     // Function to skip intro and show main content
     function skipIntro() {
