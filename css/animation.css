@@ -30,7 +30,6 @@
 .typewriter-text {
     white-space: nowrap;
     text-align: center;
-    margin: 0 auto;
     display: inline-block;
 }
 
@@ -39,11 +38,19 @@
     width: 3px;
     height: 1em;
     background-color: #fff;
-    margin-left: 1px;
+    margin-left: 2px;
     vertical-align: text-bottom;
     animation: blink 1s step-end infinite;
     position: relative;
     top: 0.1em;
+}
+
+/* Container for typewriter text and cursor */
+.typewriter-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 /* Enhanced intro styling for Apple-like feel */

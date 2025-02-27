@@ -11,8 +11,42 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Typewriter effect function
     function typeWriter(element, text, speed, startDelay = 0, callback = null) {
-        const textElement = element.querySelector('.typewriter-text');
-        const cursor = element.querySelector('.cursor');
+        // First, ensure we have the right structure:
+        // Check if typewriter container exists, if not create it
+        let container = element.querySelector('.typewriter-container');
+        if (!container) {
+            container = document.createElement('div');
+            container.className = 'typewriter-container';
+            
+            // Find or create the text element
+            let textElement = element.querySelector('.typewriter-text');
+            if (!textElement) {
+                textElement = document.createElement('span');
+                textElement.className = 'typewriter-text';
+                container.appendChild(textElement);
+            } else {
+                // Move existing text element into container
+                element.removeChild(textElement);
+                container.appendChild(textElement);
+            }
+            
+            // Find or create the cursor element
+            let cursor = element.querySelector('.cursor');
+            if (!cursor) {
+                cursor = document.createElement('span');
+                cursor.className = 'cursor';
+                container.appendChild(cursor);
+            } else {
+                // Move existing cursor into container
+                element.removeChild(cursor);
+                container.appendChild(cursor);
+            }
+            
+            element.appendChild(container);
+        }
+        
+        const textElement = container.querySelector('.typewriter-text');
+        const cursor = container.querySelector('.cursor');
         
         // Reset text
         textElement.textContent = '';
