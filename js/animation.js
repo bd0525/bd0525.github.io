@@ -6,6 +6,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const welcomeText = document.getElementById('welcomeText');
     const progressBar = document.getElementById('introProgressBar');
     
+    // Debug check for progress bar
+    if (!progressBar) {
+        console.error('Progress bar element not found! Check if the ID is correct.');
+    } else {
+        console.log('Progress bar found:', progressBar);
+        // Force the progress bar to be empty but visible
+        progressBar.style.width = '0%';
+    }
+    
     // Animation timing variables (in milliseconds)
     const initialDelay = 500;
     const typingDelayHello = 100;
@@ -24,25 +33,42 @@ document.addEventListener('DOMContentLoaded', function() {
     const calculateTotalDuration = () => {
         const helloTypingDuration = typingDelayHello * helloContent.length;
         const welcomeTypingDuration = typingDelayWelcome * welcomeContent.length;
-        const totalDuration = initialDelay + helloTypingDuration + pauseAfterHello + 500 /* fadeOut */ + 
-                            transitionDelay + welcomeTypingDuration + pauseBeforeEnd + 500 /* fadeOut */ + 
+        const totalDuration = initialDelay + helloTypingDuration + 1000 + pauseAfterHello + 500 /* fadeOut */ + 
+                            transitionDelay + welcomeTypingDuration + 1000 + pauseBeforeEnd + 500 /* fadeOut */ + 
                             overlayFadeDelay + finalDelay;
         return totalDuration;
     };
     
     const totalDuration = calculateTotalDuration();
-    let startTime = 0;
     
-    // Function to update progress bar
-    function updateProgressBar(elapsedTime) {
-        const progress = Math.min((elapsedTime / totalDuration) * 100, 100);
-        progressBar.style.width = `${progress}%`;
+    // Simplified progress bar animation that's independent of the animation sequence
+    // This ensures the progress bar will always fill completely
+    function animateProgressBar() {
+        // Use a separate animation to ensure the progress bar fills smoothly
+        let startTime = Date.now();
+        let progress = 0;
         
-        if (elapsedTime < totalDuration) {
-            requestAnimationFrame(() => {
-                updateProgressBar(Date.now() - startTime);
-            });
+        function updateProgress() {
+            const elapsed = Date.now() - startTime;
+            progress = Math.min((elapsed / totalDuration) * 100, 100);
+            
+            // Directly set the width for more reliable updating
+            progressBar.style.width = `${progress}%`;
+            
+            if (progress < 100) {
+                // Continue updating at 30fps
+                setTimeout(updateProgress, 33);
+            } else {
+                console.log('Progress bar animation completed');
+            }
         }
+        
+        // Start with a visible but empty progress bar
+        progressBar.style.width = '0%';
+        progressBar.style.display = 'block';
+        
+        // Start the progress animation
+        updateProgress();
     }
     
     // Typewriter effect function
@@ -123,13 +149,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Animation sequence
     function startAnimation() {
-        // Start tracking time for progress bar
-        startTime = Date.now();
+        // Make sure progress bar is initially visible but empty
+        progressBar.style.width = '0%';
         
-        // Start progress bar animation
-        requestAnimationFrame(() => {
-            updateProgressBar(0);
-        });
+        // Start the progress bar animation separately from main animation
+        animateProgressBar();
         
         // First animation: Hello, world
         typeWriter(helloText, helloContent, typingDelayHello, initialDelay, () => {
