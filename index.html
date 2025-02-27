@@ -121,29 +121,6 @@
             opacity: 0;
             transition: opacity 1.2s ease-in-out;
         }
-        
-        /* Progress Bar Styles */
-        .progress-container {
-            width: 300px;
-            height: 6px;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            margin-top: 80px;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
-        }
-        
-        .progress-bar {
-            height: 100%;
-            width: 0%;
-            background-color: white;
-            border-radius: 10px;
-            transition: width 0.1s linear;
-            will-change: width;
-            box-shadow: 0 0 5px white;
-        }
     </style>
 </head>
 <body>
@@ -161,10 +138,6 @@
                     <span class="typewriter-text"></span>
                     <span class="cursor"></span>
                 </div>
-            </div>
-            <!-- Progress Bar -->
-            <div class="progress-container">
-                <div class="progress-bar" id="introProgressBar"></div>
             </div>
         </div>
     </div>
