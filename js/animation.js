@@ -1,31 +1,84 @@
-/**
- * Apple-style intro animation for Boyuan's Homepage
- * Controls the animation sequence and timing for the intro overlay
- */
-document.addEventListener("DOMContentLoaded", function() {
-    // Get DOM elements
-    const introOverlay = document.getElementById("introOverlay");
-    const mainContent = document.getElementById("mainContent");
+document.addEventListener('DOMContentLoaded', function() {
+    // Elements
+    const introOverlay = document.getElementById('introOverlay');
+    const mainContent = document.getElementById('mainContent');
+    const helloText = document.getElementById('helloText');
+    const welcomeText = document.getElementById('welcomeText');
     
-    // Skip animation if it's already been shown in this session
-    if (sessionStorage.getItem('animationShown')) {
-        introOverlay.classList.add("hidden");
-        mainContent.classList.add("animated-content");
-        mainContent.style.opacity = "1";
-        return;
+    // Text content for typewriter effect
+    const helloContent = "Hello, _____";
+    const welcomeContent = "Welcome to Boyuan's Homepage";
+    
+    // Typewriter effect function
+    function typeWriter(element, text, speed, startDelay = 0, callback = null) {
+        const textElement = element.querySelector('.typewriter-text');
+        const cursor = element.querySelector('.cursor');
+        
+        // Reset text
+        textElement.textContent = '';
+        
+        // Show the element with fade-in animation
+        setTimeout(() => {
+            element.style.animation = 'fadeIn 0.5s forwards ease-out';
+            
+            let i = 0;
+            // Start typing after specified delay
+            setTimeout(function type() {
+                if (i < text.length) {
+                    textElement.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    // When typing is complete
+                    if (callback) {
+                        setTimeout(callback, 1000);
+                    }
+                }
+            }, startDelay);
+        }, 100);
     }
     
-    // Show the main content after the animation completes
-    setTimeout(() => {
-        introOverlay.style.opacity = "0";
-        mainContent.style.opacity = "1";
+    // Fade out function
+    function fadeOut(element, callback = null) {
+        element.style.animation = 'fadeOut 0.5s forwards ease-in';
         
-        // Remove the overlay after fade out
-        setTimeout(() => {
-            introOverlay.classList.add("hidden");
-        }, 500);
-        
-        // Set flag in session storage so animation only shows once per session
-        sessionStorage.setItem('animationShown', 'true');
-    }, 3500); // Total animation duration: ~3.5 seconds
+        if (callback) {
+            setTimeout(callback, 500);
+        }
+    }
+    
+    // Animation sequence
+    function startAnimation() {
+        // First animation: Hello, world
+        typeWriter(helloText, helloContent, 100, 500, () => {
+            // Fade out the first text
+            setTimeout(() => {
+                fadeOut(helloText, () => {
+                    // Second animation: Welcome text
+                    setTimeout(() => {
+                        typeWriter(welcomeText, welcomeContent, 80, 0, () => {
+                            // Pause before ending intro
+                            setTimeout(() => {
+                                fadeOut(welcomeText, () => {
+                                    // Fade out the overlay
+                                    setTimeout(() => {
+                                        introOverlay.style.opacity = '0';
+                                        
+                                        // Show main content
+                                        setTimeout(() => {
+                                            introOverlay.style.display = 'none';
+                                            mainContent.style.opacity = '1';
+                                        }, 800);
+                                    }, 500);
+                                });
+                            }, 1200);
+                        });
+                    }, 300);
+                });
+            }, 1000);
+        });
+    }
+    
+    // Start the animation sequence
+    startAnimation();
 }); 

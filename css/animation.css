@@ -1,52 +1,68 @@
-/* Intro Animation Styles */
-.intro-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #333333; /* Dark gray background as requested */
+/* Apple-style animations */
+
+/* Smooth fade transitions */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: scale(0.98); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.02); }
+}
+
+/* Blinking cursor animation */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Typewriter effect animations */
+.intro-text {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
-    opacity: 1;
-    transition: opacity 0.5s ease;
+}
+
+.typewriter-text {
+    white-space: nowrap;
+}
+
+.cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1em;
+    background-color: #fff;
+    margin-left: 4px;
+    vertical-align: text-bottom;
+    animation: blink 1s step-end infinite;
+    position: relative;
+    top: 0.1em;
+}
+
+/* Enhanced intro styling for Apple-like feel */
+.intro-overlay {
+    background: rgb(0, 0, 0);
 }
 
 .intro-content {
-    color: #fff; /* White text as requested */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.intro-text {
-    font-size: 3rem;
-    font-weight: 300;
-    opacity: 0;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .intro-text {
+        font-size: 3rem;
+    }
 }
 
-.hello-text {
-    animation: fadeInOut 1.5s ease forwards;
-}
-
-.welcome-text {
-    animation: fadeInOut 1.5s ease forwards;
-    animation-delay: 1.5s;
-}
-
-@keyframes fadeInOut {
-    0% { opacity: 0; transform: scale(0.9); }
-    50% { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(1.1); }
-}
-
-.hidden {
-    display: none;
-}
-
-/* Ensure main content starts hidden and fades in */
-.animated-content {
-    opacity: 0;
-    transition: opacity 1s ease;
+@media (max-width: 480px) {
+    .intro-text {
+        font-size: 2.2rem;
+    }
 } 
