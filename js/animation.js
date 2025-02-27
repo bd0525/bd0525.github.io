@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const welcomeText = document.getElementById('welcomeText');
     
     // Text content for typewriter effect
-    const helloContent = "Hello ,  ____";
+    const helloContent = "Hello  ,    _____";
     const welcomeContent = "Welcome to Boyuan's Homepage";
     
     // Typewriter effect function
