@@ -4,10 +4,46 @@ document.addEventListener('DOMContentLoaded', function() {
     const mainContent = document.getElementById('mainContent');
     const helloText = document.getElementById('helloText');
     const welcomeText = document.getElementById('welcomeText');
+    const progressBar = document.getElementById('introProgressBar');
+    
+    // Animation timing variables (in milliseconds)
+    const initialDelay = 500;
+    const typingDelayHello = 100;
+    const pauseAfterHello = 1000;
+    const transitionDelay = 300;
+    const typingDelayWelcome = 80;
+    const pauseBeforeEnd = 1200;
+    const overlayFadeDelay = 500;
+    const finalDelay = 800;
     
     // Text content for typewriter effect
     const helloContent = "Hello\u00A0\u00A0,\u00A0\u00A0\u00A0\u00A0_____";
     const welcomeContent = "Welcome to Boyuan's Homepage";
+    
+    // Calculate total animation duration for progress bar
+    const calculateTotalDuration = () => {
+        const helloTypingDuration = typingDelayHello * helloContent.length;
+        const welcomeTypingDuration = typingDelayWelcome * welcomeContent.length;
+        const totalDuration = initialDelay + helloTypingDuration + pauseAfterHello + 500 /* fadeOut */ + 
+                            transitionDelay + welcomeTypingDuration + pauseBeforeEnd + 500 /* fadeOut */ + 
+                            overlayFadeDelay + finalDelay;
+        return totalDuration;
+    };
+    
+    const totalDuration = calculateTotalDuration();
+    let startTime = 0;
+    
+    // Function to update progress bar
+    function updateProgressBar(elapsedTime) {
+        const progress = Math.min((elapsedTime / totalDuration) * 100, 100);
+        progressBar.style.width = `${progress}%`;
+        
+        if (elapsedTime < totalDuration) {
+            requestAnimationFrame(() => {
+                updateProgressBar(Date.now() - startTime);
+            });
+        }
+    }
     
     // Typewriter effect function
     function typeWriter(element, text, speed, startDelay = 0, callback = null) {
@@ -87,14 +123,22 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Animation sequence
     function startAnimation() {
+        // Start tracking time for progress bar
+        startTime = Date.now();
+        
+        // Start progress bar animation
+        requestAnimationFrame(() => {
+            updateProgressBar(0);
+        });
+        
         // First animation: Hello, world
-        typeWriter(helloText, helloContent, 100, 500, () => {
+        typeWriter(helloText, helloContent, typingDelayHello, initialDelay, () => {
             // Fade out the first text
             setTimeout(() => {
                 fadeOut(helloText, () => {
                     // Second animation: Welcome text
                     setTimeout(() => {
-                        typeWriter(welcomeText, welcomeContent, 80, 0, () => {
+                        typeWriter(welcomeText, welcomeContent, typingDelayWelcome, 0, () => {
                             // Pause before ending intro
                             setTimeout(() => {
                                 fadeOut(welcomeText, () => {
@@ -106,14 +150,14 @@ document.addEventListener('DOMContentLoaded', function() {
                                         setTimeout(() => {
                                             introOverlay.style.display = 'none';
                                             mainContent.style.opacity = '1';
-                                        }, 800);
-                                    }, 500);
+                                        }, finalDelay);
+                                    }, overlayFadeDelay);
                                 });
-                            }, 1200);
+                            }, pauseBeforeEnd);
                         });
-                    }, 300);
+                    }, transitionDelay);
                 });
-            }, 1000);
+            }, pauseAfterHello);
         });
     }
     
