@@ -51,6 +51,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    white-space: nowrap; /* Prevent line breaks */
 }
 
 /* Enhanced intro styling for Apple-like feel */

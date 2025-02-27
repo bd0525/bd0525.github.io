@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const welcomeText = document.getElementById('welcomeText');
     
     // Text content for typewriter effect
-    const helloContent = "Hello  ,    _____";
+    const helloContent = "Hello\u00A0\u00A0,\u00A0\u00A0\u00A0\u00A0_____";
     const welcomeContent = "Welcome to Boyuan's Homepage";
     
     // Typewriter effect function
@@ -50,6 +50,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Reset text
         textElement.textContent = '';
+        
+        // Ensure container has proper style
+        container.style.display = 'inline-flex';
+        container.style.whiteSpace = 'nowrap';
         
         // Show the element with fade-in animation
         setTimeout(() => {
