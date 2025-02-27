@@ -53,6 +53,7 @@
             z-index: 1000;
             opacity: 1;
             transition: opacity 0.8s ease-in-out;
+            pointer-events: auto;
         }
         
         .intro-content {
@@ -139,10 +140,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1010;
+            z-index: 1100;
             transition: opacity 0.3s ease;
             font-family: SF Pro Display, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            pointer-events: auto;
         }
         
         .skip-intro-btn:hover {
@@ -159,7 +161,7 @@
     <!-- Intro Animation Overlay -->
     <div class="intro-overlay" id="introOverlay">
         <!-- Skip button -->
-        <button id="skipIntroBtn" class="skip-intro-btn">
+        <button id="skipIntroBtn" class="skip-intro-btn" onclick="document.getElementById('introOverlay').style.opacity='0'; setTimeout(function() { document.getElementById('introOverlay').style.display='none'; document.getElementById('mainContent').style.opacity='1'; }, 800);">
             SKIP &nbsp;&nbsp;&#9658;
         </button>
         <div class="intro-content">

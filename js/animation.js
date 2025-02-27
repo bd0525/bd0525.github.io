@@ -6,12 +6,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const welcomeText = document.getElementById('welcomeText');
     const skipIntroBtn = document.getElementById('skipIntroBtn');
     
+    console.log('Skip button element:', skipIntroBtn); // Debug log
+    
+    // Make sure skip button is visible
+    if (skipIntroBtn) {
+        skipIntroBtn.style.display = 'flex';
+        skipIntroBtn.style.opacity = '1';
+    }
+    
     // Text content for typewriter effect
     const helloContent = "Hello\u00A0\u00A0,\u00A0\u00A0\u00A0\u00A0_____";
     const welcomeContent = "Welcome to Boyuan's Homepage";
     
     // Function to skip intro and show main content
     function skipIntro() {
+        console.log('Skip intro function called'); // Debug log
+        
         // Immediately stop any ongoing animations
         helloText.style.animation = '';
         welcomeText.style.animation = '';
@@ -40,7 +50,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Add click event listener to skip button
-    skipIntroBtn.addEventListener('click', skipIntro);
+    if (skipIntroBtn) {
+        console.log('Adding click event listener to skip button');
+        skipIntroBtn.addEventListener('click', function(event) {
+            console.log('Skip button clicked!');
+            skipIntro();
+        });
+    } else {
+        console.error('Skip button element not found!');
+    }
     
     // Typewriter effect function
     function typeWriter(element, text, speed, startDelay = 0, callback = null) {
