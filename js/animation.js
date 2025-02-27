@@ -4,10 +4,43 @@ document.addEventListener('DOMContentLoaded', function() {
     const mainContent = document.getElementById('mainContent');
     const helloText = document.getElementById('helloText');
     const welcomeText = document.getElementById('welcomeText');
+    const skipIntroBtn = document.getElementById('skipIntroBtn');
     
     // Text content for typewriter effect
     const helloContent = "Hello\u00A0\u00A0,\u00A0\u00A0\u00A0\u00A0_____";
     const welcomeContent = "Welcome to Boyuan's Homepage";
+    
+    // Function to skip intro and show main content
+    function skipIntro() {
+        // Immediately stop any ongoing animations
+        helloText.style.animation = '';
+        welcomeText.style.animation = '';
+        
+        // Reset text elements
+        const helloTextElement = helloText.querySelector('.typewriter-text');
+        const welcomeTextElement = welcomeText.querySelector('.typewriter-text');
+        
+        if (helloTextElement) helloTextElement.textContent = '';
+        if (welcomeTextElement) welcomeTextElement.textContent = '';
+        
+        // Hide skip button
+        skipIntroBtn.style.opacity = '0';
+        setTimeout(() => {
+            skipIntroBtn.style.display = 'none';
+        }, 300);
+        
+        // Fade out the overlay with the white transition
+        introOverlay.style.opacity = '0';
+        
+        // Show main content after a delay
+        setTimeout(() => {
+            introOverlay.style.display = 'none';
+            mainContent.style.opacity = '1';
+        }, 800);
+    }
+    
+    // Add click event listener to skip button
+    skipIntroBtn.addEventListener('click', skipIntro);
     
     // Typewriter effect function
     function typeWriter(element, text, speed, startDelay = 0, callback = null) {

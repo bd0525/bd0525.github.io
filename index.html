@@ -121,11 +121,47 @@
             opacity: 0;
             transition: opacity 1.2s ease-in-out;
         }
+        
+        /* Skip button styles */
+        .skip-intro-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1010;
+            transition: opacity 0.3s ease;
+            font-family: SF Pro Display, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .skip-intro-btn:hover {
+            opacity: 0.9;
+        }
+        
+        /* Triangle icon spacing */
+        .skip-intro-btn {
+            letter-spacing: 2px;
+        }
     </style>
 </head>
 <body>
     <!-- Intro Animation Overlay -->
     <div class="intro-overlay" id="introOverlay">
+        <!-- Skip button -->
+        <button id="skipIntroBtn" class="skip-intro-btn">
+            SKIP &nbsp;&nbsp;&#9658;
+        </button>
         <div class="intro-content">
             <div class="intro-text hello-text" id="helloText">
                 <div class="typewriter-container">
