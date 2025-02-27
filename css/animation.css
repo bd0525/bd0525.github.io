@@ -39,7 +39,7 @@
     width: 3px;
     height: 1em;
     background-color: #fff;
-    margin-left: 4px;
+    margin-left: 1px;
     vertical-align: text-bottom;
     animation: blink 1s step-end infinite;
     position: relative;

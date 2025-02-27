@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const welcomeText = document.getElementById('welcomeText');
     
     // Text content for typewriter effect
-    const helloContent = "Hello ,  ____";
+    const helloContent = "Hello, World";
     const welcomeContent = "Welcome to Boyuan's Homepage";
     
     // Typewriter effect function
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Start typing after specified delay
             setTimeout(function type() {
                 if (i < text.length) {
-                    textElement.textContent += text.charAt(i);
+                    textElement.textContent = text.substring(0, i + 1);
                     i++;
                     setTimeout(type, speed);
                 } else {
