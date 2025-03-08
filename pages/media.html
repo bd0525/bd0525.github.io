@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media - Boyuan's Homepage</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <!-- Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .media-item {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .media-item:last-child {
+            border-bottom: none;
+        }
+        
+        .media-title {
+            margin-bottom: 5px;
+        }
+        
+        .media-date {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        
+        .media-description {
+            margin-bottom: 15px;
+        }
+        
+        .media-links {
+            margin-top: 10px;
+        }
+        
+        .media-links a {
+            display: inline-block;
+            margin-right: 15px;
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        .media-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .media-thumbnail {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            margin-bottom: 15px;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+            <div class="profile">
+                <img src="../figures/profile.jpg" alt="Bryan(Boyuan) Deng" class="profile-img">
+                <h1>Bryan(Boyuan) Deng</h1>
+                <p class="hometown" style="font-style: normal;"><span class="label">Hometown: </span>L77星</p>
+                <p class="affiliation">Johns Hopkins University</p>
+                
+                <!-- Social Links -->
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/boyuandeng1/" target="_blank">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" alt="LinkedIn" style="width: 1em; height: 1em; vertical-align: middle; filter: invert(1);">
+                    </a>
+                    <a href="https://github.com/bd0525" target="_blank">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/github.svg" alt="GitHub" style="width: 1em; height: 1em; vertical-align: middle; filter: invert(1);">
+                    </a>
+                    <a href="https://leetcode.com/u/bd0525/" target="_blank">
+                        <img src="https://leetcode.com/static/images/LeetCode_logo_rvs.png" alt="LeetCode" style="width: 1em; height: 1em; vertical-align: middle;">
+                    </a>
+                    <a href="https://www.kaggle.com/bryanboyuan" target="_blank">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/kaggle.svg" alt="Kaggle" style="width: 1em; height: 1em; vertical-align: middle; filter: invert(1);">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Add top navigation -->
+            <nav class="top-nav">
+                <a href="/">Home</a>
+                <a href="publications.html">Publications</a>
+                <a href="projects.html">Projects</a>
+                <a href="media.html" class="active">Media</a>
+            </nav>
+
+            <section id="media">
+                <h2>Media</h2>
+                
+                <!-- Media Item 1 - Example Video -->
+                <div class="media-item">
+                    <h3 class="media-title">Basketball Commentary Highlights</h3>
+                    <p class="media-date">March 2024</p>
+                    <div class="video-container">
+                        <!-- Replace with your actual YouTube embed code -->
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <p class="media-description">
+                        Highlights from my recent basketball commentary session at the Johns Hopkins University intramural tournament.
+                    </p>
+                    <div class="media-links">
+                        <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Full Video</a>
+                        <a href="#" target="_blank"><i class="fas fa-file-alt"></i> Transcript</a>
+                    </div>
+                </div>
+
+                <!-- Media Item 2 - Example Interview -->
+                <div class="media-item">
+                    <h3 class="media-title">Interview: The Future of Computational Mechanics</h3>
+                    <p class="media-date">January 2024</p>
+                    <img src="https://via.placeholder.com/800x450" alt="Interview thumbnail" class="media-thumbnail">
+                    <p class="media-description">
+                        An in-depth interview with the Engineering Department newsletter discussing my research in computational mechanics and scientific computing.
+                    </p>
+                    <div class="media-links">
+                        <a href="#" target="_blank"><i class="fas fa-newspaper"></i> Read Article</a>
+                        <a href="#" target="_blank"><i class="fas fa-podcast"></i> Listen to Podcast</a>
+                    </div>
+                </div>
+
+                <!-- Media Item 3 - Example Podcast -->
+                <div class="media-item">
+                    <h3 class="media-title">Podcast Appearance: Engineering Today</h3>
+                    <p class="media-date">November 2023</p>
+                    <img src="https://via.placeholder.com/800x450" alt="Podcast thumbnail" class="media-thumbnail">
+                    <p class="media-description">
+                        Guest appearance on the Engineering Today podcast discussing the intersection of civil engineering and data science.
+                    </p>
+                    <div class="media-links">
+                        <a href="#" target="_blank"><i class="fas fa-podcast"></i> Listen on Spotify</a>
+                        <a href="#" target="_blank"><i class="fab fa-apple"></i> Listen on Apple Podcasts</a>
+                        <a href="#" target="_blank"><i class="fas fa-file-alt"></i> Show Notes</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html> 
