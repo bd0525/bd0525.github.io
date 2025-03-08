@@ -57,6 +57,18 @@
             color: #666;
         }
         
+        .star-icon {
+            color: #e74c3c;
+        }
+        
+        .fork-icon {
+            color: #2ecc71;
+        }
+        
+        .watch-icon {
+            color: #3498db;
+        }
+        
         .repo-languages {
             font-size: 0.9em;
             color: #666;
@@ -259,13 +271,13 @@
                             <p class="repo-description">${repo.description || 'No description available.'}</p>
                             <div class="repo-stats">
                                 <span class="repo-stat">
-                                    <i class="fas fa-star"></i> ${repo.stargazers_count}
+                                    <i class="fas fa-star star-icon"></i> ${repo.stargazers_count}
                                 </span>
                                 <span class="repo-stat">
-                                    <i class="fas fa-code-branch"></i> ${repo.forks_count}
+                                    <i class="fas fa-code-branch fork-icon"></i> ${repo.forks_count}
                                 </span>
                                 <span class="repo-stat" id="watchers-${repo.id}">
-                                    <i class="fas fa-eye"></i> <span class="watcher-count">...</span>
+                                    <i class="fas fa-eye watch-icon"></i> <span class="watcher-count">...</span>
                                 </span>
                             </div>
                             <a href="${repo.html_url}" target="_blank" class="repo-link">View on GitHub</a>
