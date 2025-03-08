@@ -7,6 +7,119 @@
     <link rel="stylesheet" href="../css/styles.css">
     <!-- Font Awesome for social icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .github-repo {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .github-repo:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .repo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .repo-name {
+            color: #333;
+            margin: 0;
+        }
+        
+        .repo-date {
+            color: #666;
+            font-style: italic;
+        }
+        
+        .repo-description {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .repo-stats {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .repo-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .repo-languages {
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .repo-link {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.3rem 0.8rem;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9em;
+            transition: background-color 0.2s;
+        }
+        
+        .repo-link:hover {
+            background-color: #0056b3;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+        
+        .error {
+            color: #d9534f;
+            padding: 1rem;
+            border: 1px solid #d9534f;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .refresh-button {
+            padding: 0.3rem 0.8rem;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .refresh-button:hover {
+            background-color: #5a6268;
+        }
+        
+        .last-updated {
+            font-size: 0.8em;
+            color: #666;
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -47,7 +160,19 @@
             </nav>
 
             <section id="projects">
-                <h2>Projects</h2>
+                <div class="section-header">
+                    <h2>Projects</h2>
+                    <button id="refresh-repos" class="refresh-button">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+                
+                <div id="github-repos">
+                    <div class="loading">Loading GitHub repositories...</div>
+                </div>
+                <p id="last-updated" class="last-updated"></p>
+                
+                <h2 style="margin-top: 3rem;">Other Projects</h2>
                 
                 <!-- Project 1 -->
                 <div class="project-item">
@@ -75,5 +200,112 @@
             </section>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchGitHubRepos();
+            
+            // Add event listener for refresh button
+            document.getElementById('refresh-repos').addEventListener('click', fetchGitHubRepos);
+        });
+        
+        function fetchGitHubRepos() {
+            const username = 'bd0525';
+            const reposContainer = document.getElementById('github-repos');
+            const lastUpdatedElement = document.getElementById('last-updated');
+            
+            // Show loading message
+            reposContainer.innerHTML = '<div class="loading">Loading GitHub repositories...</div>';
+            
+            // Fetch repositories from GitHub API
+            fetch(`https://api.github.com/users/${username}/repos?sort=updated&direction=desc`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch repositories');
+                    }
+                    return response.json();
+                })
+                .then(repos => {
+                    if (repos.length === 0) {
+                        reposContainer.innerHTML = '<p>No repositories found.</p>';
+                        return;
+                    }
+                    
+                    // Clear loading message
+                    reposContainer.innerHTML = '';
+                    
+                    // Process and display repositories
+                    repos.forEach(repo => {
+                        if (repo.fork) return; // Skip forked repositories
+                        
+                        // Create repository element
+                        const repoElement = document.createElement('div');
+                        repoElement.className = 'github-repo';
+                        
+                        // Format date
+                        const updatedDate = new Date(repo.updated_at);
+                        const formattedDate = updatedDate.toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric'
+                        });
+                        
+                        // Create repository content
+                        repoElement.innerHTML = `
+                            <div class="repo-header">
+                                <h3 class="repo-name">${repo.name}</h3>
+                                <span class="repo-date">Updated: ${formattedDate}</span>
+                            </div>
+                            <p class="repo-description">${repo.description || 'No description available.'}</p>
+                            <div class="repo-stats">
+                                <span class="repo-stat">
+                                    <i class="fas fa-star"></i> ${repo.stargazers_count}
+                                </span>
+                                <span class="repo-stat">
+                                    <i class="fas fa-code-branch"></i> ${repo.forks_count}
+                                </span>
+                                <span class="repo-stat">
+                                    <i class="fas fa-eye"></i> ${repo.watchers_count}
+                                </span>
+                            </div>
+                            <a href="${repo.html_url}" target="_blank" class="repo-link">View on GitHub</a>
+                        `;
+                        
+                        // Add repository element to container
+                        reposContainer.appendChild(repoElement);
+                        
+                        // Fetch languages for this repository
+                        fetch(repo.languages_url)
+                            .then(response => response.json())
+                            .then(languages => {
+                                const languagesList = Object.keys(languages);
+                                if (languagesList.length > 0) {
+                                    const languagesElement = document.createElement('div');
+                                    languagesElement.className = 'repo-languages';
+                                    languagesElement.innerHTML = `<strong>Languages:</strong> ${languagesList.join(', ')}`;
+                                    
+                                    // Insert before the repo link
+                                    const repoLink = repoElement.querySelector('.repo-link');
+                                    repoElement.insertBefore(languagesElement, repoLink);
+                                }
+                            })
+                            .catch(error => console.error(`Error fetching languages for ${repo.name}:`, error));
+                    });
+                    
+                    // Update last updated time
+                    const now = new Date();
+                    lastUpdatedElement.textContent = `Last updated: ${now.toLocaleString()}`;
+                })
+                .catch(error => {
+                    console.error('Error fetching repositories:', error);
+                    reposContainer.innerHTML = `
+                        <div class="error">
+                            <p>Failed to load GitHub repositories. Please try again later.</p>
+                            <p>Error: ${error.message}</p>
+                        </div>
+                    `;
+                });
+        }
+    </script>
 </body>
 </html> 
