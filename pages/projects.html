@@ -14,6 +14,9 @@
             border: 1px solid #ddd;
             border-radius: 8px;
             transition: transform 0.2s, box-shadow 0.2s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
         
         .github-repo:hover {
@@ -33,14 +36,10 @@
             margin: 0;
         }
         
-        .repo-date {
-            color: #666;
-            font-style: italic;
-        }
-        
         .repo-description {
             margin-bottom: 1rem;
             line-height: 1.6;
+            flex-grow: 1;
         }
         
         .repo-stats {
@@ -72,6 +71,7 @@
         .repo-languages {
             font-size: 0.9em;
             color: #666;
+            margin-bottom: 0.5rem;
         }
         
         .repo-link {
@@ -84,6 +84,7 @@
             border-radius: 4px;
             font-size: 0.9em;
             transition: background-color 0.2s;
+            align-self: flex-start;
         }
         
         .repo-link:hover {
@@ -130,6 +131,26 @@
             color: #666;
             font-style: italic;
             margin-top: 0.5rem;
+        }
+        
+        /* Grid layout for repositories */
+        #github-repos {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            #github-repos {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            #github-repos {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -254,19 +275,10 @@
                         const repoElement = document.createElement('div');
                         repoElement.className = 'github-repo';
                         
-                        // Format date
-                        const updatedDate = new Date(repo.updated_at);
-                        const formattedDate = updatedDate.toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: 'short',
-                            day: 'numeric'
-                        });
-                        
                         // Create repository content
                         repoElement.innerHTML = `
                             <div class="repo-header">
                                 <h3 class="repo-name">${repo.name}</h3>
-                                <span class="repo-date">Updated: ${formattedDate}</span>
                             </div>
                             <p class="repo-description">${repo.description || 'No description available.'}</p>
                             <div class="repo-stats">
