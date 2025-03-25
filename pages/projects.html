@@ -272,6 +272,9 @@
                         return;
                     }
                     
+                    // Sort repositories by stars in descending order
+                    repos.sort((a, b) => b.stargazers_count - a.stargazers_count);
+                    
                     // Clear loading message
                     reposContainer.innerHTML = '';
                     
