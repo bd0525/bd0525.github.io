@@ -376,7 +376,6 @@
                                 <span class="repo-visibility">Public</span>
                             </div>
                             <p class="repo-description">${repo.description || 'No description available.'}</p>
-                            ${repo.fork ? `<div class="repo-forked">Forked from "another repository"</div>` : ''}
                             <div class="repo-footer">
                                 <div class="repo-languages-container">
                                     <span id="language-${repo.id}">Loading language...</span>
@@ -390,28 +389,12 @@
                                     </span>
                                 </div>
                             </div>
+                            ${repo.fork ? '<div class="repo-forked">Forked from ${repo.parent?.name || "another repository"}</div>' : ''}
                         `;
                         
                         // Add repository element to container
                         reposContainer.appendChild(repoElement);
                         displayedRepos++;
-                        
-                        // If repository is forked, fetch its parent information
-                        if (repo.fork) {
-                            fetch(`https://api.github.com/repos/${username}/${repo.name}`)
-                                .then(response => response.json())
-                                .then(repoDetails => {
-                                    if (repoDetails.parent) {
-                                        const forkedElement = repoElement.querySelector('.repo-forked');
-                                        if (forkedElement) {
-                                            forkedElement.innerHTML = `Forked from <a href="${repoDetails.parent.html_url}" target="_blank" style="color: inherit;">${repoDetails.parent.full_name}</a>`;
-                                        }
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error(`Error fetching parent repo for ${repo.name}:`, error);
-                                });
-                        }
                         
                         // Fetch languages for this repository
                         fetch(repo.languages_url)
