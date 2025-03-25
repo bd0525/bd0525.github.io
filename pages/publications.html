@@ -6,6 +6,22 @@
     <title>Publications - Boyuan's Homepage</title>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .flex-row {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section-divider {
+            width: 2px;
+            background-color: #631879;
+        }
+        
+        .flex-section {
+            flex: 1;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -44,16 +60,24 @@
                 <a href="media.html">Media</a>
             </nav>
 
-            <section id="research">
-                <h2>Research Interests</h2>
-                <!-- Add your research interests -->
-                 <p> Research might not be interesting, but I am.</p>
-            </section>
+            <div class="flex-row">
+                <section id="research" class="flex-section">
+                    <h2>Research Interests</h2>
+                    <!-- Add your research interests -->
+                    <p> Research might not be interesting, but I am.</p>
+                </section>
+                
+                <div class="section-divider"></div>
+                
+                <section id="conference-travels" class="flex-section">
+                    <h2>Conference Travels</h2>
+                    <p>Record of conference travels will be displayed here...</p>
+                </section>
+            </div>
 
             <section id="publications">
                 <h2>Publications</h2>
                 
-                <!-- Example of how to add a publication -->
                 <div class="publication">
                     <h3>Title of Your Publication</h3>
                     <p class="authors">Authors: Your Name, Co-author 1, Co-author 2</p>
