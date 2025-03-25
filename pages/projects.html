@@ -84,13 +84,6 @@
             margin-right: 0.25rem;
         }
         
-        .repo-forked {
-            font-size: 0.75rem;
-            color: #57606a;
-            margin-bottom: 0.5rem;
-            font-style: italic;
-        }
-        
         .repo-footer {
             margin-top: auto;
             display: flex;
@@ -389,7 +382,6 @@
                                     </span>
                                 </div>
                             </div>
-                            ${repo.fork ? '<div class="repo-forked">Forked from ${repo.parent?.name || "another repository"}</div>' : ''}
                         `;
                         
                         // Add repository element to container
