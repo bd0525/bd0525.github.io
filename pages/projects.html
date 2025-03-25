@@ -9,19 +9,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         .github-repo {
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            transition: transform 0.2s, box-shadow 0.2s;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            transition: border-color 0.2s;
             height: 100%;
             display: flex;
             flex-direction: column;
+            background-color: #fff;
         }
         
         .github-repo:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-color: #0969da;
         }
         
         .repo-header {
@@ -32,14 +32,26 @@
         }
         
         .repo-name {
-            color: #333;
+            color: #0969da;
             margin: 0;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .repo-visibility {
+            font-size: 0.75rem;
+            color: #57606a;
+            border: 1px solid #d0d7de;
+            border-radius: 2rem;
+            padding: 0.125rem 0.5rem;
         }
         
         .repo-description {
             margin-bottom: 1rem;
-            line-height: 1.6;
+            line-height: 1.5;
             flex-grow: 1;
+            color: #24292f;
+            font-size: 0.875rem;
         }
         
         .repo-stats {
@@ -52,63 +64,56 @@
             display: flex;
             align-items: center;
             gap: 0.3rem;
-            font-size: 0.9em;
-            color: #666;
-        }
-        
-        .star-icon {
-            color: #e74c3c;
-        }
-        
-        .fork-icon {
-            color: #2ecc71;
-        }
-        
-        .watch-icon {
-            color: #3498db;
+            font-size: 0.75rem;
+            color: #57606a;
         }
         
         .repo-languages {
-            font-size: 0.9em;
-            color: #666;
+            font-size: 0.75rem;
+            color: #57606a;
             margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .language-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 0.25rem;
         }
         
         .repo-forked {
-            font-size: 0.9em;
-            color: #666;
+            font-size: 0.75rem;
+            color: #57606a;
             margin-bottom: 0.5rem;
             font-style: italic;
         }
         
-        .repo-link {
-            display: inline-block;
-            margin-top: 0.5rem;
-            padding: 0.3rem 0.8rem;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 0.9em;
-            transition: background-color 0.2s;
-            align-self: flex-start;
+        .repo-footer {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
         }
         
-        .repo-link:hover {
-            background-color: #0056b3;
+        .repo-link {
+            display: none;
         }
         
         .loading {
             text-align: center;
             padding: 2rem;
-            color: #666;
+            color: #57606a;
         }
         
         .error {
-            color: #d9534f;
+            color: #cf222e;
             padding: 1rem;
-            border: 1px solid #d9534f;
-            border-radius: 4px;
+            border: 1px solid #cf222e;
+            border-radius: 6px;
             margin-bottom: 1rem;
         }
         
@@ -121,21 +126,21 @@
         
         .refresh-button {
             padding: 0.3rem 0.8rem;
-            background-color: #6c757d;
-            color: white;
-            border: none;
-            border-radius: 4px;
+            background-color: #f6f8fa;
+            color: #24292f;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
             cursor: pointer;
             transition: background-color 0.2s;
         }
         
         .refresh-button:hover {
-            background-color: #5a6268;
+            background-color: #f3f4f6;
         }
         
         .last-updated {
             font-size: 0.8em;
-            color: #666;
+            color: #57606a;
             font-style: italic;
             margin-top: 0.5rem;
         }
@@ -143,24 +148,12 @@
         /* Grid layout for repositories */
         #github-repos {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 1.5rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
         }
         
         /* Responsive adjustments */
-        @media (max-width: 1200px) {
-            #github-repos {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-        
         @media (max-width: 992px) {
-            #github-repos {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        
-        @media (max-width: 768px) {
             #github-repos {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -170,6 +163,63 @@
             #github-repos {
                 grid-template-columns: 1fr;
             }
+        }
+        
+        /* GitHub language colors */
+        .lang-Python {
+            background-color: #3572A5;
+        }
+        
+        .lang-HTML {
+            background-color: #e34c26;
+        }
+        
+        .lang-JavaScript {
+            background-color: #f1e05a;
+        }
+        
+        .lang-CSS {
+            background-color: #563d7c;
+        }
+        
+        .lang-TypeScript {
+            background-color: #2b7489;
+        }
+        
+        .lang-Java {
+            background-color: #b07219;
+        }
+        
+        .lang-C {
+            background-color: #555555;
+        }
+        
+        .lang-CPP, .lang-C\+\+ {
+            background-color: #f34b7d;
+        }
+        
+        .lang-Shell {
+            background-color: #89e051;
+        }
+        
+        .lang-Jupyter {
+            background-color: #DA5B0B;
+        }
+        
+        .lang-Kotlin {
+            background-color: #A97BFF;
+        }
+        
+        .lang-Swift {
+            background-color: #F05138;
+        }
+        
+        .lang-Go {
+            background-color: #00ADD8;
+        }
+        
+        .lang-Rust {
+            background-color: #DEA584;
         }
     </style>
 </head>
@@ -293,6 +343,12 @@
                     // Counter for displayed repositories
                     let displayedRepos = 0;
                     
+                    // Function to get language color class
+                    function getLanguageClass(language) {
+                        if (!language) return '';
+                        return `lang-${language.replace(/\s/g, '')}`;
+                    }
+                    
                     // Process and display repositories
                     repos.forEach(repo => {
                         // Only process up to maxRepos repositories
@@ -306,49 +362,33 @@
                         // Create repository content
                         repoElement.innerHTML = `
                             <div class="repo-header">
-                                <h3 class="repo-name">${repo.name}</h3>
+                                <h3 class="repo-name">
+                                    <a href="${repo.html_url}" target="_blank" style="color: inherit; text-decoration: none;">
+                                        ${repo.name}
+                                    </a>
+                                </h3>
+                                <span class="repo-visibility">Public</span>
                             </div>
                             <p class="repo-description">${repo.description || 'No description available.'}</p>
-                            <div class="repo-stats">
-                                <span class="repo-stat">
-                                    <i class="fas fa-star star-icon"></i> ${repo.stargazers_count}
-                                </span>
-                                <span class="repo-stat">
-                                    <i class="fas fa-code-branch fork-icon"></i> ${repo.forks_count}
-                                </span>
-                                <span class="repo-stat" id="watchers-${repo.id}">
-                                    <i class="fas fa-eye watch-icon"></i> <span class="watcher-count">...</span>
-                                </span>
+                            <div class="repo-footer">
+                                <div class="repo-languages-container">
+                                    <span id="language-${repo.id}">Loading language...</span>
+                                </div>
+                                <div class="repo-stats">
+                                    <span class="repo-stat">
+                                        <i class="fas fa-star star-icon"></i> ${repo.stargazers_count}
+                                    </span>
+                                    <span class="repo-stat">
+                                        <i class="fas fa-code-branch fork-icon"></i> ${repo.forks_count}
+                                    </span>
+                                </div>
                             </div>
-                            ${repo.fork ? '<div class="repo-forked"><strong>Forked repository</strong></div>' : ''}
-                            <a href="${repo.html_url}" target="_blank" class="repo-link">View on GitHub</a>
+                            ${repo.fork ? '<div class="repo-forked">Forked from ${repo.parent?.name || "another repository"}</div>' : ''}
                         `;
                         
                         // Add repository element to container
                         reposContainer.appendChild(repoElement);
                         displayedRepos++;
-                        
-                        // Fetch the actual subscribers (watchers) count
-                        fetch(`https://api.github.com/repos/${username}/${repo.name}/subscribers`)
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw new Error('Failed to fetch subscribers');
-                                }
-                                return response.json();
-                            })
-                            .then(subscribers => {
-                                const watcherElement = document.querySelector(`#watchers-${repo.id} .watcher-count`);
-                                if (watcherElement) {
-                                    watcherElement.textContent = subscribers.length;
-                                }
-                            })
-                            .catch(error => {
-                                console.error(`Error fetching subscribers for ${repo.name}:`, error);
-                                const watcherElement = document.querySelector(`#watchers-${repo.id} .watcher-count`);
-                                if (watcherElement) {
-                                    watcherElement.textContent = '?';
-                                }
-                            });
                         
                         // Fetch languages for this repository
                         fetch(repo.languages_url)
@@ -356,19 +396,30 @@
                             .then(languages => {
                                 const languagesList = Object.keys(languages);
                                 if (languagesList.length > 0) {
-                                    const languagesElement = document.createElement('div');
-                                    languagesElement.className = 'repo-languages';
-                                    languagesElement.innerHTML = `<strong>Languages:</strong> ${languagesList.join(', ')}`;
+                                    const primaryLanguage = languagesList[0];
+                                    const languageClass = getLanguageClass(primaryLanguage);
                                     
-                                    // Insert before the forked message or repo link
-                                    const insertBefore = repo.fork ? 
-                                        repoElement.querySelector('.repo-forked') : 
-                                        repoElement.querySelector('.repo-link');
-                                    
-                                    repoElement.insertBefore(languagesElement, insertBefore);
+                                    const languageElement = document.getElementById(`language-${repo.id}`);
+                                    if (languageElement) {
+                                        languageElement.innerHTML = `
+                                            <span class="language-dot ${languageClass}"></span>
+                                            ${primaryLanguage}
+                                        `;
+                                    }
+                                } else {
+                                    const languageElement = document.getElementById(`language-${repo.id}`);
+                                    if (languageElement) {
+                                        languageElement.textContent = '';
+                                    }
                                 }
                             })
-                            .catch(error => console.error(`Error fetching languages for ${repo.name}:`, error));
+                            .catch(error => {
+                                console.error(`Error fetching languages for ${repo.name}:`, error);
+                                const languageElement = document.getElementById(`language-${repo.id}`);
+                                if (languageElement) {
+                                    languageElement.textContent = '';
+                                }
+                            });
                     });
                     
                     // Update last updated time
