@@ -74,6 +74,13 @@
             margin-bottom: 0.5rem;
         }
         
+        .repo-forked {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+        
         .repo-link {
             display: inline-block;
             margin-top: 0.5rem;
@@ -246,12 +253,13 @@
             const username = 'bd0525';
             const reposContainer = document.getElementById('github-repos');
             const lastUpdatedElement = document.getElementById('last-updated');
+            const maxRepos = 24; // Set maximum number of repositories to display
             
             // Show loading message
             reposContainer.innerHTML = '<div class="loading">Loading GitHub repositories...</div>';
             
-            // Fetch repositories from GitHub API
-            fetch(`https://api.github.com/users/${username}/repos?sort=updated&direction=desc`)
+            // Fetch repositories from GitHub API - now sorted by stars instead of update time
+            fetch(`https://api.github.com/users/${username}/repos?sort=stars&direction=desc&per_page=100`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Failed to fetch repositories');
@@ -267,9 +275,14 @@
                     // Clear loading message
                     reposContainer.innerHTML = '';
                     
+                    // Counter for displayed repositories
+                    let displayedRepos = 0;
+                    
                     // Process and display repositories
                     repos.forEach(repo => {
-                        if (repo.fork) return; // Skip forked repositories
+                        // Only process up to maxRepos repositories
+                        if (displayedRepos >= maxRepos) return;
+                        // Don't filter out forked repositories anymore
                         
                         // Create repository element
                         const repoElement = document.createElement('div');
@@ -292,11 +305,13 @@
                                     <i class="fas fa-eye watch-icon"></i> <span class="watcher-count">...</span>
                                 </span>
                             </div>
+                            ${repo.fork ? '<div class="repo-forked"><strong>Forked repository</strong></div>' : ''}
                             <a href="${repo.html_url}" target="_blank" class="repo-link">View on GitHub</a>
                         `;
                         
                         // Add repository element to container
                         reposContainer.appendChild(repoElement);
+                        displayedRepos++;
                         
                         // Fetch the actual subscribers (watchers) count
                         fetch(`https://api.github.com/repos/${username}/${repo.name}/subscribers`)
@@ -330,9 +345,12 @@
                                     languagesElement.className = 'repo-languages';
                                     languagesElement.innerHTML = `<strong>Languages:</strong> ${languagesList.join(', ')}`;
                                     
-                                    // Insert before the repo link
-                                    const repoLink = repoElement.querySelector('.repo-link');
-                                    repoElement.insertBefore(languagesElement, repoLink);
+                                    // Insert before the forked message or repo link
+                                    const insertBefore = repo.fork ? 
+                                        repoElement.querySelector('.repo-forked') : 
+                                        repoElement.querySelector('.repo-link');
+                                    
+                                    repoElement.insertBefore(languagesElement, insertBefore);
                                 }
                             })
                             .catch(error => console.error(`Error fetching languages for ${repo.name}:`, error));
