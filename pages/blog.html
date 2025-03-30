@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boyuan's Blog</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .blog-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .blog-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .filter-btn {
+            background-color: #f1f1f1;
+            border: none;
+            color: #333;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover {
+            background-color: #ddd;
+        }
+        
+        .filter-btn.active {
+            background-color: #333;
+            color: white;
+        }
+        
+        .blog-posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .blog-post {
+            border: 1px solid #e1e1e1;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .blog-post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .post-thumbnail {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .post-content {
+            padding: 15px;
+        }
+        
+        .post-title {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .post-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        
+        .category-tag {
+            background-color: #f1f1f1;
+            color: #333;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+        
+        .post-summary {
+            margin-top: 10px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .read-more {
+            display: inline-block;
+            margin-top: 10px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        .read-more:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .blog-posts {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+            <div class="profile">
+                <img src="../figures/profile.jpg" alt="Bryan(Boyuan) Deng" class="profile-img">
+                <h1>Bryan(Boyuan) Deng</h1>
+                <p class="hometown" style="font-style: normal;"><span class="label">Hometown: </span>L77星</p>
+                <p class="affiliation">Johns Hopkins University</p>
+                
+                <!-- Social Links -->
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/boyuandeng1/" target="_blank">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" alt="LinkedIn" style="width: 1em; height: 1em; vertical-align: middle; filter: invert(1);">
+                    </a>
+                    <a href="https://github.com/bd0525" target="_blank">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/github.svg" alt="GitHub" style="width: 1em; height: 1em; vertical-align: middle; filter: invert(1);">
+                    </a>
+                    <a href="https://leetcode.com/u/bd0525/" target="_blank">
+                        <img src="https://leetcode.com/static/images/LeetCode_logo_rvs.png" alt="LeetCode" style="width: 1em; height: 1em; vertical-align: middle;">
+                    </a>
+                    <a href="https://www.kaggle.com/bryanboyuan" target="_blank">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/kaggle.svg" alt="Kaggle" style="width: 1em; height: 1em; vertical-align: middle; filter: invert(1);">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Add top navigation -->
+            <nav class="top-nav">
+                <a href="../index.html">Home</a>
+                <a href="publications.html">Publications</a>
+                <a href="projects.html">Projects</a>
+                <a href="media.html">Media</a>
+                <a href="blog.html" class="active">Blog</a>
+            </nav>
+
+            <div class="blog-container">
+                <div class="blog-header">
+                    <h1>Boyuan's Blog</h1>
+                    <p>Thoughts, tutorials, and insights on data science, machine learning, and more</p>
+                </div>
+
+                <div class="blog-filter">
+                    <button class="filter-btn active" data-category="all">All</button>
+                    <button class="filter-btn" data-category="data-science">Data Science</button>
+                    <button class="filter-btn" data-category="machine-learning">Machine Learning</button>
+                    <button class="filter-btn" data-category="tutorials">Tutorials</button>
+                    <button class="filter-btn" data-category="projects">Projects</button>
+                </div>
+
+                <div class="blog-posts" id="blogPosts">
+                    <!-- Blog posts will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Blog posts data
+        const blogPosts = [
+            // Example post
+            {
+                id: 1,
+                title: "Introduction to Data Visualization with Python",
+                date: "June 15, 2023",
+                thumbnail: "../assets/blog/data-viz-thumbnail.jpg",
+                summary: "This tutorial introduces the basics of data visualization using Python libraries like Matplotlib, Seaborn, and Plotly.",
+                categories: ["data-science", "python", "tutorials"],
+                link: "blog-posts/intro-to-data-visualization.html"
+            }
+        ];
+
+        // Function to render blog posts
+        function renderBlogPosts(posts) {
+            const blogPostsContainer = document.getElementById('blogPosts');
+            blogPostsContainer.innerHTML = '';
+
+            if (posts.length === 0) {
+                blogPostsContainer.innerHTML = '<p class="no-posts">No blog posts yet. Stay tuned for updates!</p>';
+                return;
+            }
+
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'blog-post';
+                postElement.dataset.categories = post.categories.join(' ');
+
+                postElement.innerHTML = `
+                    <img src="${post.thumbnail}" alt="${post.title}" class="post-thumbnail">
+                    <div class="post-content">
+                        <h3 class="post-title">${post.title}</h3>
+                        <div class="post-meta">
+                            <span class="post-date">${post.date}</span>
+                        </div>
+                        <p class="post-summary">${post.summary}</p>
+                        <div class="post-categories">
+                            ${post.categories.map(cat => `<span class="category-tag">${cat}</span>`).join('')}
+                        </div>
+                        <a href="${post.link}" class="read-more">Read More →</a>
+                    </div>
+                `;
+
+                blogPostsContainer.appendChild(postElement);
+            });
+        }
+
+        // Filter posts by category
+        function filterPosts(category) {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                if (button.dataset.category === category) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+
+            const posts = document.querySelectorAll('.blog-post');
+            
+            if (category === 'all') {
+                posts.forEach(post => {
+                    post.style.display = 'block';
+                });
+                return;
+            }
+
+            posts.forEach(post => {
+                const categories = post.dataset.categories.split(' ');
+                if (categories.includes(category)) {
+                    post.style.display = 'block';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+        }
+
+        // Add event listeners to filter buttons
+        document.addEventListener('DOMContentLoaded', () => {
+            renderBlogPosts(blogPosts);
+
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterPosts(button.dataset.category);
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
