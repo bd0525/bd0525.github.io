@@ -177,6 +177,8 @@
                     <button class="filter-btn" data-category="data-science">Data Science</button>
                     <button class="filter-btn" data-category="machine-learning">Machine Learning</button>
                     <button class="filter-btn" data-category="deep-learning">Deep Learning</button>
+                    <button class="filter-btn" data-category="gaussian-processes">Gaussian Processes</button>
+                    <button class="filter-btn" data-category="bayesian-methods">Bayesian Methods</button>
                     <button class="filter-btn" data-category="mathematics">Mathematics</button>
                 </div>
 
@@ -191,9 +193,18 @@
         // Blog posts data
         const blogPosts = [
             {
+                id: 2,
+                title: "Doubly Stochastic Variational Inference for Deep Gaussian Processes",
+                date: "Apr 2, 2024",
+                thumbnail: "../assets/blog/dgp-thumbnail.jpg",
+                summary: "An exploration of Deep Gaussian Processes and Doubly Stochastic Variational Inference methods with mathematical foundations.",
+                categories: ["gaussian-processes", "machine-learning", "bayesian-methods", "mathematics"],
+                link: "blog-posts/dsvi-for-dgp.html"
+            },
+            {
                 id: 1,
                 title: "β-VAE Framework Derivation",
-                date: "Mar 31, 2025",
+                date: "Mar 31, 2023",
                 thumbnail: "../assets/blog/beta-vae-thumbnail.jpg",
                 summary: "A mathematical exploration of the β-VAE framework with detailed derivations of KL divergence and variational inference techniques.",
                 categories: ["machine-learning", "deep-learning", "mathematics"],
@@ -246,34 +257,23 @@
                 }
             });
 
-            const posts = document.querySelectorAll('.blog-post');
-            
             if (category === 'all') {
-                posts.forEach(post => {
-                    post.style.display = 'block';
-                });
-                return;
+                renderBlogPosts(blogPosts);
+            } else {
+                const filteredPosts = blogPosts.filter(post => 
+                    post.categories.includes(category)
+                );
+                renderBlogPosts(filteredPosts);
             }
-
-            posts.forEach(post => {
-                const categories = post.dataset.categories.split(' ');
-                if (categories.includes(category)) {
-                    post.style.display = 'block';
-                } else {
-                    post.style.display = 'none';
-                }
-            });
         }
 
-        // Add event listeners to filter buttons
-        document.addEventListener('DOMContentLoaded', () => {
-            renderBlogPosts(blogPosts);
+        // Initial render
+        renderBlogPosts(blogPosts);
 
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    filterPosts(button.dataset.category);
-                });
+        // Add event listeners to filter buttons
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                filterPosts(button.dataset.category);
             });
         });
     </script>
