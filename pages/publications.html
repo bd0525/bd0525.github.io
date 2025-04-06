@@ -64,9 +64,30 @@
         }
         
         .publication-subsection h3 {
-            border-bottom: 1px solid #ddd;
             padding-bottom: 8px;
             margin-bottom: 20px;
+        }
+        
+        /* Journal article specific styles */
+        .journal-publication {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        
+        /* Conference paper specific styles */
+        .conference-publication {
+            display: flex;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        
+        .conference-tag {
+            width: 10%;
+            margin-right: 2%;
+        }
+        
+        .conference-content {
+            width: 88%;
         }
     </style>
 </head>
@@ -129,18 +150,13 @@
                 <div class="publication-subsection">
                     <h3>Peer Reviewed Journal Articles</h3>
                     
-                    <div class="publication">
-                        <div class="pub-meta">
-                            <!-- No red boxes for journal articles -->
-                        </div>
-                        <div class="pub-content">
-                            <h3>Title of Journal Article</h3>
-                            <p class="authors">Authors: Name, Co-author 1, Co-author 2</p>
-                            <p class="description">Brief description of the journal article...</p>
-                            <div class="publication-links">
-                                <a href="#" target="_blank">[PDF]</a>
-                                <a href="#" target="_blank">[DOI]</a>
-                            </div>
+                    <div class="journal-publication">
+                        <h3>Title of Journal Article</h3>
+                        <p class="authors">Authors: Name, Co-author 1, Co-author 2</p>
+                        <p class="description">Brief description of the journal article...</p>
+                        <div class="publication-links">
+                            <a href="#" target="_blank">[PDF]</a>
+                            <a href="#" target="_blank">[DOI]</a>
                         </div>
                     </div>
                 </div>
@@ -148,17 +164,14 @@
                 <div class="publication-subsection">
                     <h3>Conference Papers & Proceedings</h3>
                     
-                    <div class="publication">
-                        <div class="pub-meta">
+                    <div class="conference-publication">
+                        <div class="conference-tag">
                             <div class="conference-boxes">
                                 <span class="venue-box">Conference Name</span>
                                 <span class="venue-box">Year</span>
-                                <!-- For single string case, use just one box:
-                                <span class="venue-box">Conference Name Year</span>
-                                -->
                             </div>
                         </div>
-                        <div class="pub-content">
+                        <div class="conference-content">
                             <h3>Title of Your Publication</h3>
                             <p class="authors">Authors: Name, Co-author 1, Co-author 2</p>
                             <p class="description">Description of the paper...</p>
@@ -171,13 +184,13 @@
                     </div>
 
                     <!-- Example with a single venue box -->
-                    <div class="publication">
-                        <div class="pub-meta">
+                    <div class="conference-publication">
+                        <div class="conference-tag">
                             <div class="conference-boxes">
                                 <span class="venue-box">NIPS 2024</span>
                             </div>
                         </div>
-                        <div class="pub-content">
+                        <div class="conference-content">
                             <h3>Example with Single Venue Box</h3>
                             <p class="authors">Authors: Name, Co-author 1, Co-author 2</p>
                             <p class="description">This shows how a single venue box would look...</p>
