@@ -21,6 +21,38 @@
         .flex-section {
             flex: 1;
         }
+        
+        .publication {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .pub-meta {
+            margin-right: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            min-width: 120px;
+        }
+        
+        .pub-content {
+            flex: 1;
+        }
+        
+        .venue-box {
+            background-color: #e53935;
+            color: white;
+            padding: 4px 8px;
+            margin: 2px;
+            border-radius: 4px;
+            display: inline-block;
+            font-size: 0.9em;
+        }
+        
+        .pub-meta-boxes {
+            display: flex;
+            flex-wrap: wrap;
+        }
     </style>
 </head>
 <body>
@@ -80,14 +112,42 @@
                 <h2>Publications</h2>
                 
                 <div class="publication">
-                    <h3>Title of Your Publication</h3>
-                    <p class="authors">Authors: Name, Co-author 1, Co-author 2</p>
-                    <p class="venue">Conference/Journal Name, Year</p>
-                    <p class="description">Description of the paper...</p>
-                    <div class="publication-links">
-                        <a href="#" target="_blank">[PDF]</a>
-                        <a href="#" target="_blank">[Code]</a>
-                        <a href="#" target="_blank">[DOI]</a>
+                    <div class="pub-meta">
+                        <div class="pub-meta-boxes">
+                            <span class="venue-box">Conference Name</span>
+                            <span class="venue-box">Year</span>
+                            <!-- For single string case, use just one box:
+                            <span class="venue-box">Conference Name Year</span>
+                            -->
+                        </div>
+                    </div>
+                    <div class="pub-content">
+                        <h3>Title of Your Publication</h3>
+                        <p class="authors">Authors: Name, Co-author 1, Co-author 2</p>
+                        <p class="description">Description of the paper...</p>
+                        <div class="publication-links">
+                            <a href="#" target="_blank">[PDF]</a>
+                            <a href="#" target="_blank">[Code]</a>
+                            <a href="#" target="_blank">[DOI]</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example with a single venue box -->
+                <div class="publication">
+                    <div class="pub-meta">
+                        <div class="pub-meta-boxes">
+                            <span class="venue-box">NIPS 2024</span>
+                        </div>
+                    </div>
+                    <div class="pub-content">
+                        <h3>Example with Single Venue Box</h3>
+                        <p class="authors">Authors: Name, Co-author 1, Co-author 2</p>
+                        <p class="description">This shows how a single venue box would look...</p>
+                        <div class="publication-links">
+                            <a href="#" target="_blank">[PDF]</a>
+                            <a href="#" target="_blank">[Code]</a>
+                        </div>
                     </div>
                 </div>
 
