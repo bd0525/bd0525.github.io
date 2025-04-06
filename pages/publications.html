@@ -53,6 +53,16 @@
             display: flex;
             flex-wrap: wrap;
         }
+        
+        .publication-subsection {
+            margin-bottom: 30px;
+        }
+        
+        .publication-subsection h3 {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -111,47 +121,78 @@
             <section id="publications">
                 <h2>Publications</h2>
                 
-                <div class="publication">
-                    <div class="pub-meta">
-                        <div class="pub-meta-boxes">
-                            <span class="venue-box">Conference Name</span>
-                            <span class="venue-box">Year</span>
-                            <!-- For single string case, use just one box:
-                            <span class="venue-box">Conference Name Year</span>
-                            -->
+                <div class="publication-subsection">
+                    <h3>Conference Papers & Proceedings</h3>
+                    
+                    <div class="publication">
+                        <div class="pub-meta">
+                            <div class="pub-meta-boxes">
+                                <span class="venue-box">Conference Name</span>
+                                <span class="venue-box">Year</span>
+                                <!-- For single string case, use just one box:
+                                <span class="venue-box">Conference Name Year</span>
+                                -->
+                            </div>
+                        </div>
+                        <div class="pub-content">
+                            <h3>Title of Your Publication</h3>
+                            <p class="authors">Authors: Name, Co-author 1, Co-author 2</p>
+                            <p class="description">Description of the paper...</p>
+                            <div class="publication-links">
+                                <a href="#" target="_blank">[PDF]</a>
+                                <a href="#" target="_blank">[Code]</a>
+                                <a href="#" target="_blank">[DOI]</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="pub-content">
-                        <h3>Title of Your Publication</h3>
-                        <p class="authors">Authors: Name, Co-author 1, Co-author 2</p>
-                        <p class="description">Description of the paper...</p>
-                        <div class="publication-links">
-                            <a href="#" target="_blank">[PDF]</a>
-                            <a href="#" target="_blank">[Code]</a>
-                            <a href="#" target="_blank">[DOI]</a>
+
+                    <!-- Example with a single venue box -->
+                    <div class="publication">
+                        <div class="pub-meta">
+                            <div class="pub-meta-boxes">
+                                <span class="venue-box">NIPS 2024</span>
+                            </div>
+                        </div>
+                        <div class="pub-content">
+                            <h3>Example with Single Venue Box</h3>
+                            <p class="authors">Authors: Name, Co-author 1, Co-author 2</p>
+                            <p class="description">This shows how a single venue box would look...</p>
+                            <div class="publication-links">
+                                <a href="#" target="_blank">[PDF]</a>
+                                <a href="#" target="_blank">[Code]</a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Example with a single venue box -->
-                <div class="publication">
-                    <div class="pub-meta">
-                        <div class="pub-meta-boxes">
-                            <span class="venue-box">NIPS 2024</span>
+                <div class="publication-subsection">
+                    <h3>Peer Reviewed Journal Articles</h3>
+                    
+                    <div class="publication">
+                        <div class="pub-meta">
+                            <div class="pub-meta-boxes">
+                                <span class="venue-box">Journal Name</span>
+                                <span class="venue-box">Year</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="pub-content">
-                        <h3>Example with Single Venue Box</h3>
-                        <p class="authors">Authors: Name, Co-author 1, Co-author 2</p>
-                        <p class="description">This shows how a single venue box would look...</p>
-                        <div class="publication-links">
-                            <a href="#" target="_blank">[PDF]</a>
-                            <a href="#" target="_blank">[Code]</a>
+                        <div class="pub-content">
+                            <h3>Title of Journal Article</h3>
+                            <p class="authors">Authors: Name, Co-author 1, Co-author 2</p>
+                            <p class="description">Brief description of the journal article...</p>
+                            <div class="publication-links">
+                                <a href="#" target="_blank">[PDF]</a>
+                                <a href="#" target="_blank">[DOI]</a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Add more publications as needed -->
+                <!-- Add more publication subsections as needed, e.g.:
+                <div class="publication-subsection">
+                    <h3>Journal Articles</h3>
+                    <!-- Journal publications would go here -->
+                </div>
+                -->
             </section>
         </div>
     </div>
