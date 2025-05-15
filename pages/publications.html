@@ -6,6 +6,7 @@
     <title>Publications - Boyuan's Homepage</title>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://unpkg.com/globe.gl"></script>
     <style>
         .flex-row {
             display: flex;
@@ -158,7 +159,7 @@
                 
                 <section id="conference-travels" class="flex-section">
                     <h2>Conference Travels</h2>
-                    <p>TBD...</p>
+                    <div id="globeViz" style="height: 400px;"></div>
                 </section>
             </div>
 
@@ -229,5 +230,46 @@
             </section>
         </div>
     </div>
+    
+    <script>
+        // Define your conference travel locations
+        const travelLocations = [
+            { lat: 35.6895, lng: 139.6917, label: "Tokyo, Japan" },
+            { lat: 51.5074, lng: -0.1278, label: "London, UK" },
+            { lat: 40.7128, lng: -74.0060, label: "New York, USA" }
+        ];
+        
+        // Wait for the DOM to load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize globe
+            const globe = Globe()
+                .globeImageUrl('https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+                .backgroundImageUrl('https://unpkg.com/three-globe/example/img/night-sky.png')
+                .width(document.getElementById('globeViz').clientWidth)
+                .height(400)
+                .pointsData(travelLocations)
+                .pointLabel('label')
+                .pointRadius(0.5)
+                .pointColor(() => 'rgba(255, 0, 0, 0.8)')
+                .pointAltitude(0.1)
+                .pointsMerge(true)
+                .onPointHover(point => {
+                    if (point) {
+                        document.body.style.cursor = 'pointer';
+                    } else {
+                        document.body.style.cursor = 'default';
+                    }
+                })(document.getElementById('globeViz'));
+                
+            // Add controls
+            globe.controls().autoRotate = true;
+            globe.controls().autoRotateSpeed = 0.5;
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                globe.width(document.getElementById('globeViz').clientWidth);
+            });
+        });
+    </script>
 </body>
 </html> 
