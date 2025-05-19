@@ -237,7 +237,7 @@
                     <a href="https://www.linkedin.com/in/boyuandeng1/" target="_blank">
                         <img src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" alt="LinkedIn" style="width: 1em; height: 1em; vertical-align: middle; filter: invert(1);">
                     </a>
-                    <a href="https://github.com/bd0525" target="_blank">
+                    <a href="https://github.com/bydeng01" target="_blank">
                         <img src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/github.svg" alt="GitHub" style="width: 1em; height: 1em; vertical-align: middle; filter: invert(1);">
                     </a>
                     <a href="https://leetcode.com/u/bd0525/" target="_blank">
@@ -328,7 +328,7 @@
         });
         
         function fetchGitHubRepos() {
-            const username = 'bd0525';
+            const username = 'bydeng01';
             const reposContainer = document.getElementById('github-repos');
             const lastUpdatedElement = document.getElementById('last-updated');
             const maxRepos = 24; // Set maximum number of repositories to display
@@ -439,18 +439,4 @@
                     
                     // Update last updated time
                     const now = new Date();
-                    lastUpdatedElement.textContent = `Last updated: ${now.toLocaleString()}`;
-                })
-                .catch(error => {
-                    console.error('Error fetching repositories:', error);
-                    reposContainer.innerHTML = `
-                        <div class="error">
-                            <p>Failed to load GitHub repositories. Please try again later.</p>
-                            <p>Error: ${error.message}</p>
-                        </div>
-                    `;
-                });
-        }
-    </script>
-</body>
-</html> 
+                    lastUpdatedElement.textContent = `
